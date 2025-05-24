@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html lang= en>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+        <title>My Form</title>
+    </head>
+
+    <body>
+        <script src="CodeCampTester.js"></script>
+        <h1 id="title">My Form</h1>
+        <p id="description">Please fill out this form with your information.</p>
+        <form id="survey-form">
+            <label for="name" id="name-label">Name:</label><br>
+            <input type="text" id="name" name="name" placeholder="Name" required><br><br>
+
+            <label for="email" id="email-label">Email:</label><br>
+            <input type="email" id="email" name="email" placeholder="Email" required><br><br>
+
+            <label for="phone" id="number-label">Phone Number:</label><br>
+            <input type="number" id="number" min="1.00" max="10000" name="phone" placeholder="Phone" required><br><br>
+
+            <label for="message">Message:</label><br>
+            <input type="text" id="message" name="message" placeholder="Message"></textarea><br><br>
+
+            <label>
+                <input type="radio" name="choice" value="option1">
+                Cartoons
+            </label><br>
+
+            <label>
+                <input type="radio" name="choice" value="option2">
+                Anime
+            </label>
+
+            <br>
+            <br>
+
+            <label>
+                <input type="checkbox" name="option1" value="apple">
+                Cat
+            </label><br>
+
+            <label>
+                <input type="checkbox" name="option2" value="banana">
+                Dog
+            </label>
+
+            <br>
+            <br>
+
+            <label for="options">Rate your experience on my site:</label>
+                <select id="dropdown" name="dropdown">
+                    <option value="one">Good</option>
+                    <option value="two">OK</option>
+                    <option value="three">Bad</option>
+                </select>
+            
+            <br>
+            <br>
+
+            <label for="comments">Comments:</label><br>
+            <textarea id="comments" name="comments" rows="4" cols="40"></textarea>
+
+            <br>
+            <br>
+
+            <input type="submit" id="submit" value="Submit">
+          </form>
+    </body>
+
+</html>

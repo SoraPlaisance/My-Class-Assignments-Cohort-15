@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            .stage-wrapper {
+                width: 800px;
+                height; 600px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: #fff;
+                filter: blur(10px) contrast(20);
+            }
+            .obj-1, .obj-2 {
+                width: 300px;
+                height: 300px;
+                position: absolute;
+                top: 50%;
+                border-radius: 50%;
+                transform: translate(-50%, -50%)
+            }
+            @keyframes move-left-right {
+                0% { left: 30%; }
+                50% { left: 50%; }
+                100% { left: 30%; }
+            }
+            @keyframes move-right-left {
+                0% { left: 70%; }
+                50% { left: 50%; }
+                100% { left: 70%; }
+            }
+            .obj-1 {
+                left 30%;
+                animation: move-left-right 5s ease infinite;
+                background: magenta;
+                opacity: 50%;
+            }
+            .obj-2 {
+                left 70%;
+                animation: move-right-left 5s ease infinite;
+                background: cyan;
+                opacity: 50%;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="navbar">
+            <span>Gooey Effect With CSS Filter</span>
+        </div class= "wrapper">
+            <div class="stage wrapper">
+                <div class="obj-1"></div>
+                <div= class="obj-2"></div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,19 +1,1089 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSS Grid Layout</title>
-    <link rel="stylesheet" href="./style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sora Plaisance • Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* 1) RESET & BOX-SIZING */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* 2) VARIABLES */
+:root {
+  --clr-primary: #2c3e50;
+  --clr-accent:  #1abc9c;
+  --clr-bg:      #f4f4f9;
+  --clr-text:    #2c3e50;
+  --ff-main:     'Arial', sans-serif;
+  --spacing:     1.5rem;
+  --label-width: 200px;         /* fixed width for section labels */
+  --radius:      8px;
+}
+html[data-theme='dark'] {
+  --clr-primary: #1e1e1e;
+  --clr-accent:  #bb86fc;
+  --clr-bg:      #2c2c2c;
+  --clr-text:    #f4f4f4;
+}
+
+/* 3) BASE LAYOUT */
+html, body {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  background: var(--clr-bg);
+  color: var(--clr-text);
+  font-family: var(--ff-main);
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
+main {
+  flex: 1;  /* push footer down */
+}
+a {
+  color: #a40aa7;
+  text-decoration: none;
+}
+a:hover, a:focus {
+  text-decoration: underline;
+}
+button {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* 4) CONTAINER */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing);
+}
+
+/* 5) WELCOME SECTION */
+#welcome-section {
+  flex-shrink: 0;
+  height: 100vh;               /* viewport height */
+  background: var(--clr-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+}
+#welcome-section h1 {
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+/* 6) NAVBAR & HEADER */
+#navbar, .site-header {
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background: linear-gradient(135deg, var(--clr-primary), var(--clr-accent));
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.header-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing) 0;
+}
+.header-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.logo {
+  height: 50px;
+}
+.site-title {
+  font-size: 1.8rem;
+  color: var(--clr-bg);
+}
+
+
+/* ===== BACK TO TOP BUTTON ===== */
+#back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  display: none;                     /* hidden by default */
+  width: 3rem;
+  height: 3rem;
+  background: var(--clr-accent);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 0;
+  z-index: 2000;
+}
+#back-to-top.show {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+#back-to-top:hover,
+#back-to-top:focus {
+  background: var(--clr-primary);
+  outline: none;
+}
+
+
+/* Mobile-first nav stacking */
+.header-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing);
+  width: 100%;
+  margin: var(--spacing) 0 0;
+  padding: 0 var(--spacing);
+}
+.header-nav a {
+  background: white;
+  color: var(--clr-primary);
+  border: 1px solid var(--clr-accent);
+  border-radius: var(--radius);
+  padding: var(--spacing);
+  text-align: center;
+  transition: background .2s, transform .2s;
+}
+.header-nav a:hover,
+.header-nav a:focus {
+  background: var(--clr-accent);
+  color: white;
+  transform: translateY(-2px);
+}
+#theme-toggle {
+  background: white;
+  color: var(--clr-primary);
+  border: 1px solid var(--clr-accent);
+  padding: var(--spacing);
+  border-radius: var(--radius);
+  margin: 0 var(--spacing) 0 auto;
+}
+.header-bottom {
+  text-align: center;
+  padding-bottom: var(--spacing);
+}
+.subtitle {
+  color: var(--clr-bg);
+  font-size: 1rem;
+  opacity: 0.85;
+}
+
+/* 7) SECTIONS (MOBILE STACK) */
+.section {
+  background: var(--clr-bg);       /* use page background color (light or dark) */
+  border: none;                    /* remove the border */
+  border-radius: var(--radius);
+  padding: var(--spacing);
+  margin: var(--spacing) 0;
+  color: var(--clr-text);          /* make sure text uses the themed text color */
+}
+.section-label {
+  font-size: 1.6rem;
+  margin-bottom: var(--spacing);
+}
+.section-label span {
+  display: block;
+}
+.section-content {
+  margin-top: 0;
+}
+
+/* 8) PROJECTS GRID (MOBILE) */
+.projects-grid {
+  display: grid;
+  gap: var(--spacing);
+  grid-template-columns: 1fr;
+  margin: var(--spacing) 0;
+}
+.project-card,
+.project-tile {
+  background: white;
+  border: 1px solid var(--clr-accent);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: transform .2s;
+}
+.project-card:hover,
+.project-tile:hover {
+  transform: translateY(-5px);
+}
+.project-card img,
+.project-tile img {
+  width: 100%;
+  display: block;
+}
+.project-info {
+  padding: var(--spacing);
+}
+.project-info h3 {
+  margin-bottom: .25rem;
+}
+.project-info p {
+  font-size: .9rem;
+}
+
+/* 9) CONTACT LIST (MOBILE) */
+.contact-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--spacing) 0 0;
+}
+.contact-list li {
+  margin-bottom: .5rem;
+}
+
+/* 10) TABLET LAYOUT (≥600px) */
+@media (min-width: 600px) {
+  /* Header → row */
+  .header-top {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    padding: var(--spacing) 0;
+  }
+  .header-left {
+    flex-direction: row;
+    gap: var(--spacing);
+  }
+  .header-nav {
+    flex-direction: row;
+    justify-content: flex-end;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    gap: 1rem;
+  }
+  .header-nav a {
+    background: none;
+    border: none;
+    color: var(--clr-bg);
+    padding: .4rem;
+    border-bottom: 2px solid transparent;
+  }
+  .header-nav a:hover,
+  .header-nav a:focus {
+    border-color: rgba(255,255,255,0.8);
+  }
+  #theme-toggle {
+    background: rgba(255,255,255,0.2);
+    color: var(--clr-bg);
+    margin: 0 0 0 var(--spacing);
+  }
+
+  /* Sections → two-column grid with fixed label width */
+  .section {
+    display: grid;
+    grid-template-columns: var(--label-width) 1fr;
+    gap: var(--spacing);
+    margin: calc(var(--spacing) * 1.5) 0;
+    align-items: start;
+  }
+  .section-label {
+    border-right: 3px solid var(--clr-primary);
+    padding-right: var(--spacing);
+    text-align: right;
+    margin-bottom: 0;
+    font-size: 2rem;
+  }
+  .section-content {
+    padding-left: var(--spacing);
+  }
+
+  /* Projects → two columns */
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 11) DESKTOP LAYOUT (≥900px) */
+@media (min-width: 900px) {
+  /* Flush main content left */
+  main {
+    width: 80vw;
+    max-width: none;
+    margin: 0;
+    padding: 0 var(--spacing);
+  }
+
+  /* Projects → three columns */
+  .projects-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Increase vertical spacing */
+  .section {
+    margin: calc(var(--spacing) * 2) 0;
+  }
+  .section-label {
+    font-size: 2.4rem;
+  }
+  .subtitle {
+    font-size: 1.1rem;
+  }
+}
+
+/* 12) FOOTER */
+.footer {
+  background: var(--clr-primary);
+  color: var(--clr-bg);
+  border-top: 3px solid var(--clr-accent);
+  padding: var(--spacing) 0;
+}
+.footer .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.footer p {
+  margin: 0;
+  font-size: .9rem;
+  opacity: .85;
+}
+.footer a {
+  color: var(--clr-bg);
+  margin-left: var(--spacing);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-color .2s;
+}
+.footer a:hover,
+.footer a:focus {
+  border-color: var(--clr-bg);
+}
+
+/* Default label border */
+.section-label {
+  border-right: 3px solid var(--clr-primary);
+  /* …other rules… */
+}
+
+/* In dark theme, make that border white (or use the text color) */
+html[data-theme='dark'] .section-label {
+  border-right-color: var(--clr-text);
+}
+/* Dark-mode footer text & links */
+html[data-theme='dark'] .footer,
+html[data-theme='dark'] .footer p,
+html[data-theme='dark'] .footer a {
+  color: var(--clr-text); /* #f4f4f4 in dark mode */
+}
+/* Base (mobile): no right border */
+.section-label {
+  /* remove any global border */
+  border-right: none;
+  font-size: 1.6rem;
+  margin-bottom: var(--spacing);
+}
+
+/* Tablet and up: add the right border */
+@media (min-width: 600px) {
+  .section-label {
+    border-right: 3px solid var(--clr-primary);
+    padding-right: var(--spacing);
+    text-align: right;
+    margin-bottom: 0;
+    font-size: 2rem;
+  }
+}
+  </style>
 </head>
 <body>
-    <div class="grid-container">
-        <div class="grid-item">Item 1</div>
-        <div class="grid-item">Item 2</div>
-        <div class="grid-item">Item 3</div>
-        <div class="grid-item">Item 4</div>
-        <div class="grid-item">Item 5</div>
-        <div class="grid-item">Item 6</div>
+
+  <!-- NAVBAR at the very top -->
+  <nav id="navbar" class="site-header">
+    <div class="container header-top">
+      <div class="header-left">
+        <img src="img/logoSora.jpg" alt="Your Logo" class="logo" />
+        <!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Name • Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* 1) RESET & BOX-SIZING */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* 2) VARIABLES */
+:root {
+  --clr-primary: #59005b;
+  --clr-accent:  #a40aa7;
+  --clr-bg:      #f4f4f9;
+  --clr-text:    #59005b;
+  --ff-main:     'Arial', sans-serif;
+  --spacing:     1.5rem;
+  --label-width: 200px;         /* fixed width for section labels */
+  --radius:      8px;
+}
+html[data-theme='dark'] {
+  --clr-primary: #1e1e1e;
+  --clr-accent:  #bb86fc;
+  --clr-bg:      #2c2c2c;
+  --clr-text:    #f4f4f4;
+}
+
+/* 3) BASE LAYOUT */
+html, body {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  background: var(--clr-bg);
+  color: var(--clr-text);
+  font-family: var(--ff-main);
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
+main {
+  flex: 1;  /* push footer down */
+}
+a {
+  color: #a40aa7;
+  text-decoration: none;
+}
+a:hover, a:focus {
+  text-decoration: underline;
+}
+button {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* 4) CONTAINER */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing);
+}
+
+/* 5) WELCOME SECTION */
+#welcome-section {
+  flex-shrink: 0;
+  height: 100vh;               /* viewport height */
+  background: #ec65c6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+}
+#welcome-section h1 {
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+/* 6) NAVBAR & HEADER */
+#navbar, .site-header {
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background: linear-gradient(135deg, #e41bbb, #fbdeda);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.header-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing) 0;
+}
+.header-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.logo {
+  height: 50px;
+}
+.site-title {
+  font-size: 1.8rem;
+  color: var(--clr-bg);
+}
+
+
+/* ===== BACK TO TOP BUTTON ===== */
+#back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  display: none;                     /* hidden by default */
+  width: 3rem;
+  height: 3rem;
+  background: var(--clr-accent);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 0;
+  z-index: 2000;
+}
+#back-to-top.show {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+#back-to-top:hover,
+#back-to-top:focus {
+  background: var(--clr-primary);
+  outline: none;
+}
+
+
+/* Mobile-first nav stacking */
+.header-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing);
+  width: 100%;
+  margin: var(--spacing) 0 0;
+  padding: 0 var(--spacing);
+}
+.header-nav a {
+  background: white;
+  color: var(--clr-primary);
+  border: 1px solid var(--clr-accent);
+  border-radius: var(--radius);
+  padding: var(--spacing);
+  text-align: center;
+  transition: background .2s, transform .2s;
+}
+.header-nav a:hover,
+.header-nav a:focus {
+  background: var(--clr-accent);
+  color: white;
+  transform: translateY(-2px);
+}
+#theme-toggle {
+  background: white;
+  color: var(--clr-primary);
+  border: 1px solid var(--clr-accent);
+  padding: var(--spacing);
+  border-radius: var(--radius);
+  margin: 0 var(--spacing) 0 auto;
+}
+.header-bottom {
+  text-align: center;
+  padding-bottom: var(--spacing);
+}
+.subtitle {
+  color: var(--clr-bg);
+  font-size: 1rem;
+  opacity: 0.85;
+}
+
+/* 7) SECTIONS (MOBILE STACK) */
+.section {
+  background: var(--clr-bg);       /* use page background color (light or dark) */
+  border: none;                    /* remove the border */
+  border-radius: var(--radius);
+  padding: var(--spacing);
+  margin: var(--spacing) 0;
+  color: var(--clr-text);          /* make sure text uses the themed text color */
+}
+.section-label {
+  font-size: 1.6rem;
+  margin-bottom: var(--spacing);
+}
+.section-label span {
+  display: block;
+}
+.section-content {
+  margin-top: 0;
+}
+
+/* 8) PROJECTS GRID (MOBILE) */
+.projects-grid {
+  display: grid;
+  gap: var(--spacing);
+  grid-template-columns: 1fr;
+  margin: var(--spacing) 0;
+}
+.project-card,
+.project-tile {
+  background: white;
+  border: 1px solid var(--clr-accent);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: transform .2s;
+}
+.project-card:hover,
+.project-tile:hover {
+  transform: translateY(-5px);
+}
+.project-card img,
+.project-tile img {
+  width: 100%;
+  display: block;
+}
+.project-info {
+  padding: var(--spacing);
+}
+.project-info h3 {
+  margin-bottom: .25rem;
+}
+.project-info p {
+  font-size: .9rem;
+}
+
+/* 9) CONTACT LIST (MOBILE) */
+.contact-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--spacing) 0 0;
+}
+.contact-list li {
+  margin-bottom: .5rem;
+}
+
+/* 10) TABLET LAYOUT (≥600px) */
+@media (min-width: 600px) {
+  /* Header → row */
+  .header-top {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    padding: var(--spacing) 0;
+  }
+  .header-left {
+    flex-direction: row;
+    gap: var(--spacing);
+  }
+  .header-nav {
+    flex-direction: row;
+    justify-content: flex-end;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    gap: 1rem;
+  }
+  .header-nav a {
+    background: none;
+    border: none;
+    color: var(--clr-bg);
+    padding: .4rem;
+    border-bottom: 2px solid transparent;
+  }
+  .header-nav a:hover,
+  .header-nav a:focus {
+    border-color: rgba(255,255,255,0.8);
+  }
+  #theme-toggle {
+    background: rgba(255,255,255,0.2);
+    color: var(--clr-bg);
+    margin: 0 0 0 var(--spacing);
+  }
+
+  /* Sections → two-column grid with fixed label width */
+  .section {
+    display: grid;
+    grid-template-columns: var(--label-width) 1fr;
+    gap: var(--spacing);
+    margin: calc(var(--spacing) * 1.5) 0;
+    align-items: start;
+  }
+  .section-label {
+    border-right: 3px solid var(--clr-primary);
+    padding-right: var(--spacing);
+    text-align: right;
+    margin-bottom: 0;
+    font-size: 2rem;
+  }
+  .section-content {
+    padding-left: var(--spacing);
+  }
+
+  /* Projects → two columns */
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 11) DESKTOP LAYOUT (≥900px) */
+@media (min-width: 900px) {
+  /* Flush main content left */
+  main {
+    width: 80vw;
+    max-width: none;
+    margin: 0;
+    padding: 0 var(--spacing);
+  }
+
+  /* Projects → three columns */
+  .projects-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Increase vertical spacing */
+  .section {
+    margin: calc(var(--spacing) * 2) 0;
+  }
+  .section-label {
+    font-size: 2.4rem;
+  }
+  .subtitle {
+    font-size: 1.1rem;
+  }
+}
+
+/* 12) FOOTER */
+.footer {
+  background: var(--clr-primary);
+  color: var(--clr-bg);
+  border-top: 3px solid var(--clr-accent);
+  padding: var(--spacing) 0;
+}
+.footer .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.footer p {
+  margin: 0;
+  font-size: .9rem;
+  opacity: .85;
+}
+.footer a {
+  color: var(--clr-bg);
+  margin-left: var(--spacing);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-color .2s;
+}
+.footer a:hover,
+.footer a:focus {
+  border-color: var(--clr-bg);
+}
+
+/* Default label border */
+.section-label {
+  border-right: 3px solid var(--clr-primary);
+  /* …other rules… */
+}
+
+/* In dark theme, make that border white (or use the text color) */
+html[data-theme='dark'] .section-label {
+  border-right-color: var(--clr-text);
+}
+/* Dark-mode footer text & links */
+html[data-theme='dark'] .footer,
+html[data-theme='dark'] .footer p,
+html[data-theme='dark'] .footer a {
+  color: var(--clr-text); /* #f4f4f4 in dark mode */
+}
+/* Base (mobile): no right border */
+.section-label {
+  /* remove any global border */
+  border-right: none;
+  font-size: 1.6rem;
+  margin-bottom: var(--spacing);
+}
+
+/* Tablet and up: add the right border */
+@media (min-width: 600px) {
+  .section-label {
+    border-right: 3px solid var(--clr-primary);
+    padding-right: var(--spacing);
+    text-align: right;
+    margin-bottom: 0;
+    font-size: 2rem;
+  }
+}
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR at the very top -->
+  <nav id="navbar" class="site-header">
+    <div class="container header-top">
+      <div class="header-left">
+        <img src="img/logoSora.jpg" alt="Your Logo" class="logo" />
+        <h1 class="site-title">Sora Plaisance</h1>
+      </div>
+      <div class="header-nav">
+        <a href="#welcome-section">Home</a>
+        <a href="#about">About</a>
+        <a href="#projects">Work</a>
+        <a href="#contact">Contact</a>
+        <a id="profile-link" href="https://github.com/SoraPlaisance" target="_blank" rel="noopener">Profile</a>
+        <a href="resume.pdf" target="_blank" rel="noopener">Resume</a>
+        <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
+      </div>
     </div>
+    <div class="container header-bottom">
+      <p class="subtitle">Crafting beautiful, responsive web experiences</p>
+    </div>
+  </nav>
+
+  <!-- WELCOME SECTION -->
+  <section id="welcome-section">
+    <h1>Welcome to My Portfolio</h1>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <main class="container main-content">
+    <section id="about" class="section">
+      <div class="section-label"><span>About</span><span>Me</span></div>
+      <div class="section-content">
+        <p>Hi, I’m <strong>Sora Plaisance</strong>. I build responsive, accessible websites with HTML, CSS, and JavaScript. Explore my work below!</p>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <div class="section-label"><span>Work</span></div>
+      <div class="section-content">
+        <div class="projects-grid">
+          <a href="tribute_page/index.html" class="project-card project-tile">
+            <img src="Assets/tribute-thumb.png" alt="Tribute Page Preview" />
+            <div class="project-info">
+              <h3>Tribute Page</h3>
+              <p>HTML &amp; CSS</p>
+            </div>
+          </a>
+          <a href="product_page/index.html" class="project-card project-tile">
+            <img src="Assets/tribute-thumb.png" alt="Product Page Preview" />
+            <div class="project-info">
+              <h3>Product Page</h3>
+              <p>HTML &amp; CSS</p>
+            </div>
+          </a>
+          <a href="superhero_page/super.html" class="project-card project-tile">
+            <img src="Assets/tribute-thumb.png" alt="Super Hero Page Preview" />
+            <div class="project-info">
+              <h3>Super Hero Page</h3>
+              <p>HTML &amp; CSS</p>
+            </div>
+          </a>
+          <a href="project-one/sora.html" class="project-card project-tile">
+            <img src="Assets/tribute-thumb.png" alt="Project One Preview" />
+            <div class="project-info">
+              <h3>Project One</h3>
+              <p>HTML</p>
+            </div>
+          </a>
+          <a href="gooey_effect_in_css/gooey.html" class="project-card project-tile">
+            <img src="Assets/tribute-thumb.png" alt="Gooey Effect Preview" />
+            <div class="project-info">
+              <h3>Gooey Effect in CSS</h3>
+              <p>HTML &amp; CSS</p>
+            </div>
+          </a>
+          <!-- copy above block for other projects -->
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="section-label"><span>Contact</span><span>Me</span></div>
+      <div class="section-content">
+        <ul class="contact-list">
+          <li>Email: <a href="soraplaisance06@gmail.com">soraplaisance06@gmail.com</a></li>
+          <li>Phone: <a href="tel:+16366750255">636-675-0255</a></li>
+          <li>GitHub: <a href="https://github.com/SoraPlaisance" target="_blank" rel="noopener">Sora Plaisance</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <p>© 2025 Sora Plaisance • Built with &amp; CSS Variables</p>
+    </div>
+  </footer>
+
+  <!-- BACK TO TOP -->
+  <button id="back-to-top" aria-label="Back to Top">↑</button>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Theme toggle
+    const btn = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+    btn.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      root.setAttribute('data-theme', next);
+      btn.textContent = next === 'light' ? '🌙' : '☀️';
+    });
+
+    // Back to top
+    const backToTop = document.getElementById('back-to-top');
+    const welcomeHeight = window.innerHeight;
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > welcomeHeight) backToTop.classList.add('show');
+      else backToTop.classList.remove('show');
+    });
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+  <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+</body>
+</html>
+
+      </div>
+      <div class="header-nav">
+        <a href="#welcome-section">Home</a>
+        <a href="#about">About</a>
+        <a href="#projects">Work</a>
+        <a href="#contact">Contact</a>
+        <a id="profile-link" href="https://github.com/SoraPlaisance" target="_blank" rel="noopener">Profile</a>
+        <a href="resume.pdf" target="_blank" rel="noopener">Resume</a>
+        <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
+      </div>
+    </div>
+    <div class="container header-bottom">
+      <p class="subtitle">Crafting beautiful, responsive web experiences</p>
+    </div>
+  </nav>
+
+  <!-- WELCOME SECTION -->
+  <section id="welcome-section">
+    <h1>Welcome to My Portfolio</h1>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <main class="container main-content">
+    <section id="about" class="section">
+      <div class="section-label"><span>About</span><span>Me</span></div>
+      <div class="section-content">
+        <p>Hi, I’m <strong>Sora Plaisance</strong>. I build responsive, accessible websites with HTML, CSS, and JavaScript. Explore my work below!</p>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <div class="section-label"><span>Work</span></div>
+      <div class="section-content">
+        <div class="projects-grid">
+          <a href="tribute_page/index.html" class="project-card project-tile">
+            <img src="Assets/tribute-thumb.png" alt="Tribute Page Preview" />
+            <div class="project-info">
+              <h3>Tribute Page</h3>
+              <p>HTML &amp; CSS</p>
+            </div>
+          </a>
+          <a href="product_page/index.html" class="project-card project-tile">
+            <img src="Assets/tribute-thumb.png" alt="Product Page Preview" />
+            <div class="project-info">
+              <h3>Product Page</h3>
+              <p>HTML &amp; CSS</p>
+            </div>
+          </a>
+          <a href="superhero_page/super.html" class="project-card project-tile">
+            <img src="Assets/tribute-thumb.png" alt="Super Hero Page Preview" />
+            <div class="project-info">
+              <h3>Super Hero Page</h3>
+              <p>HTML &amp; CSS</p>
+            </div>
+          </a>
+           <a href="survey_form/myform.html" class="project-card project-tile">
+            <img src="Assets/tribute-thumb.png" alt="Survey Form Preview" />
+            <div class="project-info">
+              <h3>Survey Form</h3>
+              <p>HTML</p>
+            </div>
+          </a>
+          <a href="project-one/sora.html" class="project-card project-tile">
+            <img src="Assets/tribute-thumb.png" alt="Project One Preview" />
+            <div class="project-info">
+              <h3>Project One</h3>
+              <p>HTML</p>
+            </div>
+          </a>
+          <a href="gooey_effect_in_css/gooey.html" class="project-card project-tile">
+            <img src="Assets/tribute-thumb.png" alt="Gooey Effect Preview" />
+            <div class="project-info">
+              <h3>Gooey Effect in CSS</h3>
+              <p>HTML &amp; CSS</p>
+            </div>
+          </a>
+          <!-- copy above block for other projects -->
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="section-label"><span>Contact</span><span>Me</span></div>
+      <div class="section-content">
+        <ul class="contact-list">
+          <li>Email: <a href="soraplaisance06@gmail.com">soraplaisance06@gmail.com</a></li>
+          <li>Phone: <a href="tel:+16366750255">636-675-0255</a></li>
+          <li>GitHub: <a href="https://github.com/SoraPlaisance" target="_blank" rel="noopener">Sora Plaisance</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <p>© 2025 Sora Plaisance • Built with &amp; CSS Variables</p>
+    </div>
+  </footer>
+
+  <!-- BACK TO TOP -->
+  <button id="back-to-top" aria-label="Back to Top">↑</button>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Theme toggle
+    const btn = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+    btn.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      root.setAttribute('data-theme', next);
+      btn.textContent = next === 'light' ? '🌙' : '☀️';
+    });
+
+    // Back to top
+    const backToTop = document.getElementById('back-to-top');
+    const welcomeHeight = window.innerHeight;
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > welcomeHeight) backToTop.classList.add('show');
+      else backToTop.classList.remove('show');
+    });
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+  <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
 </body>
 </html>
