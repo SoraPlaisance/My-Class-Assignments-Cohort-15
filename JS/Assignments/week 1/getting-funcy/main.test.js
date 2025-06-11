@@ -1,9 +1,34 @@
 /**********************************
  * YOUR CODE GOES HERE THIS TIME! *
  **********************************/
+let x = 3;
+let y = 10;
+let z = 4;
+let greeting = "hello";
+let firstName = "Xenon";
+callStatus = "ringing";
 
+function double() {
+    x = x*2;
+}
 
-
+function triple() {
+    y = y*3;
+}
+function square() {
+    z = z**2;
+}
+function beNice() {
+    return greeting = "hello " + firstName;
+}
+function changeName() {
+    firstName = "Danger";
+    return firstName;
+}
+function hangUp() {
+    callStatus = "call ended";
+    return callStatus;
+}
 /*********************************************************************************************************************
 
  * CODE BELOW HERE IS FOR INTERNAL USE ONLY! IT ENSURES THAT THE TESTING *
