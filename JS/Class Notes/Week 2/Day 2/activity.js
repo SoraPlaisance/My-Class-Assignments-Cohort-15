@@ -1,8 +1,25 @@
 // Declare firstName, lastName, country, city, age, isMarried, year variable and assign value to it and use the typeof operator to check different data types.
 
-// Check if type of '10' is equal to 10
+let firstName = "John";
+let lastName = "Doe";
+let country = "USA";
+let city = "New York";
+let age = 30;
+let isMarried = false;
+let year = 2023;
 
+console.log(typeof firstName);
+console.log(typeof lastName);
+console.log(typeof country);
+console.log(typeof city);
+console.log(typeof age);
+console.log(typeof isMarried);
+console.log(typeof year);
+// Check if type of '10' is equal to 10
+console.log(typeof "10" == typeof 10)
 // Check if parseInt('9.8') is equal to 10
+console.log(parseInt('9.8') == 10)
+console.log(parseInt('9.8') == 9) //always rounds down
 
 // Boolean value is either true or false.
 
