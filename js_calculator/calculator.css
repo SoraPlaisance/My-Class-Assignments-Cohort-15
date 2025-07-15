@@ -1,0 +1,46 @@
+html, body { height: 100%; margin: 0; }
+
+body {
+    background-size: cover;
+    display: flex; align-items: center; justify-content: center;
+    font-family: Arial, sans-serif;
+    background-image: linear-gradient(to bottom, #ffabd1, #f34996);
+    text-align: center;
+}
+
+#calculator {
+    width: 260px;
+    height: 400px;
+    padding: 20px; border-radius: 5px;
+    box-shadow: 0 0 10px rbga(0,0,0,0.5);
+    background-image: url("img/kitty_calculator.jpg")
+}
+
+#display /*styles calculators display area*/ {
+    height: 50px; /*fixed height so the lign-height centers tect*/
+    text-align: right; overflow-x: auto;
+    border: 1px solid #999; border-radius: 4px;
+    margin-bottom: 10px; /*small gap below before the buttons start*/
+    padding: 0 10px; /*10 px padding on left/right to keep text from touching edges*/
+    background: #eee;
+    font-size: 1.5em; line-height: 50px;
+}
+
+.key /*styles all calculator buttons*/{
+    width: 45px;
+    height: 45px;
+    margin: 2px; /*small gap between buttons*/
+    font-size: 1.1em;
+    cursor: pointer; /*changes cursor to pointer on hover*/
+    margin-right: 0.8em;
+}
+
+.operator /*additional style for opperator buttons (/*-+)*/ {
+    background: #dfefff;
+}
+
+.equal /*additional style for the '=' button*/ {
+    background: #ffdfe0;
+    height: 94px; /*twice the normal height to span two rows*/
+    float: right; /*floats it to the right side of the container*/
+}

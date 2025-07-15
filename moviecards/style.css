@@ -1,0 +1,36 @@
+body { 
+  font-family: Arial, sans-serif; /* 🧠 Sets a clean default 
+font. */ 
+  background-color: #4b007c; /* 🧠 Dark background for a 
+movie-theme feel. */ 
+  color: #ffaffa; /* 🧠 Makes all text white for contrast. */ 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  height: 100vh; /* 🧠 Centers everything perfectly in the 
+middle of the screen. */ 
+} 
+
+
+.card { 
+JavaScript
+  background-color: #333; /* 🧠 Gives the card a dark gray 
+background. */ 
+  padding: 20px; 
+  border-radius: 8px; /* 🧠 Adds space inside and smooth 
+corners. */ 
+  width: 280px; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6); /* 🧠 Adds a soft 
+shadow for depth. */ 
+}
+
+
+h2 { 
+  margin-top: 0; /* 🧠 Removes space above the title for a 
+tighter look. */ 
+} 
+ 
+
+p { 
+  margin: 8px 0; /* 🧠 Gives space between paragraphs. */ 
+}  

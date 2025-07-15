@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <link rel="stylesheet" href="calculator.css">
+</head>
+<body>
+    <script src="CodeCampTester.js"></script>
+
+    <div id="calculator"> <!-- wrapper for the entire calculator, id allows us to target it in CSS and JS-->
+
+    <div id="display">0</div> <!-- shows the current number or result -->
+
+    <!-- Row 1 buttons -->
+    <button id="seven" class="key" onclick="press('7')">7</button>
+    <!-- 
+    -class="key" applies the base button style.
+    -onclick="press(7)" calls the press() JS function with argument '7' when clicked.
+    -the inner text "7" is what the user sees on the button
+    -->
+    <button id="eight" class="key" onclick="press('8')">8</button>
+    <button id="nine" class="key" onclick="press('9')">9</button>
+    <button id="divide" class="key operator" onclick="press('/')">/</button>
+    <!-- class="key operator" applies both .key and .operator styles-->
+
+    <br>
+
+    <!-- Row 2 buttons -->
+    <button id="four" class="key" onclick="press('4')">4</button>
+    <button id="five" class="key" onclick="press('5')">5</button>
+    <button id="six" class="key" onclick="press('6')">6</button>
+    <button id="multiply" class="key operator" onclick="press('*')">*</button>
+    
+    <br>
+
+    <!-- Row 3 buttons -->
+    <button id="one" class="key" onclick="press('1')">1</button>
+    <button id="two" class="key" onclick="press('2')">2</button>
+    <button id="three" class="key" onclick="press('3')">3</button>
+    <button id="subtract" class="key operator" onclick="press('-')">-</button>
+
+    <br>
+
+    <!-- Row 4 buttons -->
+    <button id="zero" class="key" onclick="press('0')">0</button>
+    <button id="decimal" class="key" onclick="press('.')">.</button>
+    <button id="equals" class="key equal" onclick="press('=')">=</button>
+    <!--class="key equal" adresses both the key and equal class-->
+    <button id="add" class="key operator" onclick="press('+')">+</button>
+
+    <!-- clear button spans full width -->
+    <button id="clear" class="key" style="width: 188px;" onclick="clearDisplay()">C</button>
+    </div>
+
+    <script src="calculator.js"></script>
+</body>
+</html>
